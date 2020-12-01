@@ -41,7 +41,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     //Timer
 
-    const deadline = '2020-11-30';
+    const deadline = '2020-12-31';
 
     function getTimeRemaining(endtime) {
         const t = Date.parse(endtime) - Date.parse(new Date()),
@@ -182,9 +182,16 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-        getResource('http://localhost:3000/menu')
+        // getResource('http://localhost:3000/menu')
+        //     .then(data => {
+        // data.forEach(({img, altimg, title, descr, price}) => {
+        //     new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+        //         });
+        //     });
+
+        axios.get('http://localhost:3000/menu')
             .then(data => {
-                data.forEach(({img, altimg, title, descr, price}) => {
+                data.data.forEach(({img, altimg, title, descr, price}) => {
                     new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
                 });
             });
