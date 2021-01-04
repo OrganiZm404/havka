@@ -103,4 +103,4 @@ function calc() {
     getDynamicInfirmation('#age');
 }
 
-module.exports = calc;
+export default calc;

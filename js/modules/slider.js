@@ -1,20 +1,18 @@
-function slider() {
-    //Slider
+function slider({container, slide, nextArrow, prevArrow, totalCounter, currentCounter, wrapper, field}) {
     let offset = 0;
     let slideIndex = 1;
 
-    const slides = document.querySelectorAll('.offer__slide'),
-          slider = document.querySelector('.offer__slider'),
-          prev = document.querySelector('.offer__slider-prev'),
-          next = document.querySelector('.offer__slider-next'),
-          total = document.querySelector('#total'),
-          current = document.querySelector('#current'),
-          slidesWrapper = document.querySelector('.offer__slider-wrapper'),
-          slidesField = document.querySelector('.offer__slider-inner'),
+    const slides = document.querySelectorAll(slide),
+          slider = document.querySelector(container),
+          prev = document.querySelector(prevArrow),
+          next = document.querySelector(nextArrow),
+          total = document.querySelector(totalCounter),
+          current = document.querySelector(currentCounter),
+          slidesWrapper = document.querySelector(wrapper),
+          slidesField = document.querySelector(field),
           width = window.getComputedStyle(slidesWrapper).width;
     
-    
-    if (slides.length < 10) {
+        if (slides.length < 10) {
         total.textContent = `0${slides.length}`;
         current.textContent =`0${slideIndex}`;
     } else {
@@ -76,16 +74,13 @@ function slider() {
         dots.push(dot);
     }
 
-    function deleteNoteDigits (str) {
-        return +str.replace(/\D/g, '');
-    }
-
     next.addEventListener('click', () => {
         if (offset == deleteNoteDigits (width) * (slides.length - 1)) {
             offset = 0;
         } else {
-            offset += deleteNoteDigits (width)
+            offset += deleteNoteDigits (width);
         }
+
         slidesField.style.transform = `translateX(-${offset}px)`;
 
         if (slideIndex == slides.length) {
@@ -93,6 +88,7 @@ function slider() {
         } else {
             slideIndex++;
         }
+        
         if (slides.length < 10) {
             current.textContent = `0${slideIndex}`;
         } else {
@@ -150,37 +146,10 @@ function slider() {
         // } 
 
     });
+    function deleteNoteDigits (str) {
+        return +str.replace(/\D/g, '');
+    }
 
-    // showSlides(slideIndex);
-    // if (slides.length < 10) {
-    //     total.textContent = `0${slides.length}`;
-    // } else {
-    //     total.textContent = slides.length;
-    // }
-    // function showSlides(n) {
-    //     if (n > slides.length) {
-    //         slideIndex = 1;
-    //     }
-    //     if (n < 1) {
-    //         slideIndex = slides.length;
-    //     }
-    //     slides.forEach(item => item.style.display = 'none')
-    //     slides[slideIndex - 1].style.display = 'block';
-    //     if (slides.length < 10) {
-    //         current.textContent = `0${slideIndex}`;
-    //     } else {
-    //         current.textContent = slideIndex;
-    //     }
-    // }
-    // function plusSlides(n) {
-    //     showSlides(slideIndex += 1);
-    // }
-    // prev.addEventListener('click', () => {
-    //     plusSlides(-1);
-    // });
-    // next.addEventListener('click', () => {
-    //     plusSlides(1);
-    // });
 }
 
-module.exports = slider;
+export default slider;
